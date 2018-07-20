@@ -1,0 +1,38 @@
+# 注册中心端口
+server:
+  port: 1116
+
+
+spring:
+  application:
+    name: zuul-server
+#zipkin 地址
+  zipkin:
+    base-url: http://localhost:1117
+    enabled: true
+  sleuth:
+    enabled: true
+    sampler:
+      percentage: 1.0
+
+
+
+# 路由转发
+zuul:
+  routes:
+    account-servers:
+      path: /account/**
+      serviceId: account-service
+    assets-servers:
+      path: /assets/**
+      serviceId: assets-service
+
+#将zuul注册到服务中心,这样可以通过serviceId来转发请求
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1112/eureka/
+
+
+
+

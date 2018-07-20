@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.chenhe</groupId>
+  <artifactId>springcloudtest</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>eureka-server</module>
+    <module>config-server</module>
+    <module>account-services</module>
+    <module>assets-services</module>
+    <module>client-app</module>
+    <module>zuul-server</module>
+    <module>zipkin-server</module>
+  </modules>
+  <packaging>pom</packaging>
+  <name>springcloudtest</name>
+
+  <description>spring cloud 应用</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <java.version>1.8</java.version>
+  </properties>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+<!-- 如果项目有多个子模块,而且每个模块都需要引入依赖,但是为了项目的正常运行,必须让所有的子项目使用依赖项的统一版本,才能保证测试和发布的是相同的结果,那么如何保证模块之间的版本一致呢?
+  maven 使用dependencyManagement 来统一模块的依赖版本问题
+  在在父项目的pom文件中,我们会使用到dependencyManagement元素,通过它来管理jar包的版本,让子项目中引用一个依赖而不用显示的列出版本号,Maven会沿着父子层次向上走,
+  直到找到一个拥有dependencyManagement元素中指定的版本号
+ -->
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- 替代SpringBoot父依赖 -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>1.5.10.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- SpringCloud依赖 -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>Dalston.SR3</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <!-- 源码使用的jdk版本 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+
+  <!-- 配置除中央仓库之外的其它仓库 -->
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+</project>

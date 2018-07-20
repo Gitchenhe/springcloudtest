@@ -1,0 +1,16 @@
+# 注册中心端口
+server:
+  port: 1112
+eureka:
+  instance:
+    hostname: eureka-server-1
+  client:
+    register-with-eureka: false # 由于我们目前创建的应用是一个服务注册中心,而不是普通的应用,默认情况下,这个应用会向注册中心(它自己)注册它自己,设置为false,表示禁止这样做
+    fetch-registry: false #表示不去检索其它服务,因为注册中心本身的职责就是维护服务实例,他也不需要去检索其它服务
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false #关闭eureka的自我保护
+
+
+

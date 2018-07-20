@@ -1,0 +1,31 @@
+spring:
+ # profiles:
+ #   active: native
+
+  cloud:
+    config:
+      server:
+        #native:
+          #search-locations: D:/lanmao/springcloudtest/dev-config #配置本地配置文件路径
+          #fail-on-error: true
+        git:
+          uri: https://github.com/Gitchenhe/config  #git仓库地址
+          search-paths: springcloudtest #git仓库下的相对路径,可以配置多个,用逗号分隔
+          #username:      #git仓库的账号
+          #password:      #git仓库的密码
+  application:
+    name: config-server
+server:
+  port: 1111
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1112/eureka
+
+
+logging:
+  level:
+    root: info
+
+
+
