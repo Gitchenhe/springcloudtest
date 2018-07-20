@@ -1,16 +1,19 @@
 server:
   port: 1113
+
 spring:
   application:
     name: account-service
-#zipkin 地址
+
   zipkin:
-    base-url: http://localhost:1117
+    base-url: http://localhost:1117 #zipkin 地址
     enabled: true
+
   sleuth:
     enabled: true
     sampler:
-      percentage: 1
+      percentage: 1 # 追踪消息的百分比,1 是所有
+
   cloud:
     config:
       name: account-service
@@ -19,6 +22,14 @@ spring:
       discovery:
         enabled: true               # 开启Config服务发现支持
         service-id: config-server
+
+    bus:
+      trace:
+        enabled: true #开启消息跟踪
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
 
 management:
   security:
