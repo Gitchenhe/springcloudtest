@@ -31,7 +31,8 @@ spring:
     host: 127.0.0.1
     port: 5672
 
+#利用Actuator暴露的refresh接口来实现配置的动态更新,客户端management配置,post请求时不会报HTTP(401)未授权
 management:
   security:
-    enabled: false  #利用Actuator暴露的refresh接口来实现配置的动态更新,客户端management配置,post请求时不会报HTTP(401)未授权
+    enabled: false
 

@@ -1,16 +1,11 @@
 package com.chenhe.system;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.env.PropertySourceLoader;
-import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
+import java.util.List;
 
 /**
  * @author chenhe
@@ -18,16 +13,26 @@ import java.util.Properties;
  * @desc 自定义配置文件录取,解决默认读取乱码问题
  **/
 public class DefaultPropertySourceLoader implements PropertySourceLoader {
+    @Override
+    public String[] getFileExtensions() {
+        return new String[0];
+    }
 
-    private Logger logger = LoggerFactory.getLogger(DefaultPropertySourceLoader.class);
+    @Override
+    public List<PropertySource<?>> load(String name, Resource resource) throws IOException {
+        return null;
+    }
+
+    /*private Logger logger = LoggerFactory.getLogger(DefaultPropertySourceLoader.class);
 
     @Override
     public String[] getFileExtensions() {
         return new String[]{"properties", "xml"};
     }
 
+
     @Override
-    public PropertySource<?> load(String name, Resource resource, String profile) throws IOException {
+    public List<PropertySource<?>> load(String name, Resource resource, String profile) throws IOException {
         if (profile == null) {
             Properties properties = getProperties(resource);
             if (!properties.isEmpty()) {
@@ -57,5 +62,5 @@ public class DefaultPropertySourceLoader implements PropertySourceLoader {
         }
 
         return properties;
-    }
+    }*/
 }

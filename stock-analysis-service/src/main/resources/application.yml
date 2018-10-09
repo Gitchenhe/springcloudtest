@@ -1,0 +1,23 @@
+
+server:
+  port: 1118
+spring:
+  application:
+    name: stock-analysis-service
+  datasource:
+      url: jdbc:mysql://39.105.57.61:1102/stock_analysis?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: chen1993
+      driver-class-name: com.mysql.jdbc.Driver
+
+query:
+  task:
+    execute:
+      hour: 15
+      minute: 10
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:1112/eureka
+

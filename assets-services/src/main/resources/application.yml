@@ -21,10 +21,25 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 5672
+  datasource:
+    url: jdbc:mysql://localhost:3306/assets?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://localhost:3306/common?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    name: dbCommon
 
 management:
   security:
     enabled: false  #利用Actuator暴露的refresh接口来实现配置的动态更新,客户端management配置,post请求时不会报HTTP(401)未授权
+
+mybatis:
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.chenhe
 
 logging:
   level:
